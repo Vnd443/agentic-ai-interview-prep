@@ -1,0 +1,17 @@
+# Personal / copyrighted source files — kept local, not published
+# (their content is already summarized into the topic .md files)
+Venna_Naga_DurgaPrasad_Resume.pdf
+AI_Engineer_Interview_Guide.pdf
+*.pdf
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+.idea/
+.vscode/
+
+# Python (one-off generators)
+__pycache__/
+*.pyc
