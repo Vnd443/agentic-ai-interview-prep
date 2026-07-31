@@ -8,7 +8,7 @@
 
 ---
 
-## The 20 topics, by tier
+## The 22 topics, by tier
 
 ### Tier 1 — GenAI / Agentic Core (your headline; master these first)
 | # | Topic | Guide Q | Why it's core |
@@ -23,6 +23,8 @@
 | 08 | [Evaluation](../08-evaluation/README.md) | Q06 | Ship responsibly |
 | 09 | [Cost Optimization](../09-cost-optimization/README.md) | Q02 | Build within budget |
 | 10 | [Safety & Guardrails](../10-safety-guardrails/README.md) | Q10 | Non-negotiable for prod |
+| 21 | [Context Engineering](../21-context-engineering/README.md) 🆕 | — | **Differentiator — the agent superset skill** |
+| 22 | [Multi-Agent Orchestration](../22-agent-orchestration/README.md) 🆕 | — | **Differentiator — your Agentic AI home turf** |
 
 ### Tier 2 — Frameworks & Platforms
 | # | Topic | Why |
@@ -52,7 +54,7 @@
 
 **Phase 1 — Core fluency (Tier 1).** Topics 01→10 in order. For each: read → notes → cheatsheet → rehearse Q&A out loud. You should be able to *teach* each topic.
 
-**Phase 2 — Your edge (05, 06, 13).** Go deep on agents, MCP, custom skills, and agentic coding tools. Prepare a flagship build story — this is what makes you memorable.
+**Phase 2 — Your edge (05, 06, 13, 21, 22).** Go deep on agents, MCP, custom skills, agentic coding tools, **context engineering (21)**, and **multi-agent orchestration (22)**. Prepare a flagship build story — this is what makes you memorable.
 
 **Phase 3 — Frameworks & backbone (11, 12, 14–17).** These support your stories; you need working fluency, not mastery. Prioritise where your resume claims them.
 

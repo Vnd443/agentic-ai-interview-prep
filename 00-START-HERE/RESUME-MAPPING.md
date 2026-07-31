@@ -17,6 +17,8 @@ Purpose: for **every claim on your resume**, know (a) which topic folder covers 
 | LLM evaluation | 08 | _TODO_ |
 | Cost optimization | 09 | _TODO (with numbers)_ |
 | Safety / guardrails | 10 | _TODO_ |
+| Context engineering (compaction, memory, context assembly) | 21 | _TODO (differentiator)_ |
+| Multi-agent orchestration (orchestrator-worker, loop control) | 22 | _TODO (differentiator, flagship)_ |
 
 ## Frameworks & Platforms
 | Resume skill | Topic | Proof |

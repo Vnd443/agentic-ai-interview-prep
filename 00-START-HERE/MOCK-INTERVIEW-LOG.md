@@ -36,6 +36,8 @@ Log every rehearsed answer or full mock here. Self-score 1–5. Turn every ≤3 
 - Production → "three layers of monitoring, then narrow the failure mode."
 - Safety → "OWASP LLM Top 10 + NIST AI RMF."
 - Behavioral → "end every story with a number."
+- Context engineering → "name the 4 levers: Write / Select / Compress / Isolate; call out 'lost in the middle'."
+- Orchestration → "justify every agent vs a single-agent baseline; loop needs max-iteration cap + budget guard."
 
 ---
 

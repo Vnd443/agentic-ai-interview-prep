@@ -25,6 +25,8 @@ Columns: **C**=concepts, **CS**=cheatsheet, **QA**=rehearsed out loud, **P**=pro
 | 18 | LLM System Design | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | 19 | Production Debugging | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | 20 | Behavioral & FDE | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| 21 | Context Engineering 🆕 | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| 22 | Multi-Agent Orchestration 🆕 | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 
 ## Weekly focus
 - **This week's topics:** _TODO_
@@ -33,7 +35,7 @@ Columns: **C**=concepts, **CS**=cheatsheet, **QA**=rehearsed out loud, **P**=pro
 
 ## Milestones
 - [ ] Tier 1 (01–10) all 🟨 or better
-- [ ] Flagship agents/MCP story locked (05, 06)
+- [ ] Flagship agents/MCP story locked (05, 06, 21, 22)
 - [ ] 3–5 STAR stories written (20)
 - [ ] First full mock interview logged
 - [ ] Every Tier-1 topic ✅ (can teach from memory)

@@ -14,7 +14,7 @@ ROADMAP & INTERVIEW-QA/
 │  ├─ PROGRESS-TRACKER.md        ← status across all 20 topics
 │  ├─ RESUME-MAPPING.md          ← resume line → topic → proof project
 │  └─ MOCK-INTERVIEW-LOG.md      ← rehearsed answers + self-scores
-├─ 01-llm-foundations/ … 20-behavioral-and-fde/
+├─ 01-llm-foundations/ … 22-agent-orchestration/
 │  each topic folder contains:
 │    ├─ README.md         ← hub: what/why, subtopics, flow, angles, status
 │    ├─ concepts.md       ← your notes
@@ -26,14 +26,14 @@ ROADMAP & INTERVIEW-QA/
 └─ Venna_Naga_DurgaPrasad_Resume.pdf ← source for topic mapping
 ```
 
-## The 20 topics
-**Tier 1 — GenAI/Agentic core:** 01 LLM Foundations · 02 Prompt Engineering · 03 Embeddings & Vector Search · 04 RAG · 05 Agents & Tool Use · 06 MCP & Custom Skills · 07 Fine-Tuning · 08 Evaluation · 09 Cost Optimization · 10 Safety & Guardrails
+## The 22 topics
+**Tier 1 — GenAI/Agentic core:** 01 LLM Foundations · 02 Prompt Engineering · 03 Embeddings & Vector Search · 04 RAG · 05 Agents & Tool Use · 06 MCP & Custom Skills · 07 Fine-Tuning · 08 Evaluation · 09 Cost Optimization · 10 Safety & Guardrails · 21 Context Engineering 🆕 · 22 Multi-Agent Orchestration 🆕
 **Tier 2 — Frameworks:** 11 LangChain/LangGraph · 12 AWS Bedrock/SageMaker · 13 Agentic Coding Tools
 **Tier 3 — Backbone:** 14 Python · 15 AWS Core · 16 IaC & DevOps · 17 Databases & SQL
 **Tier 4 — Interview craft:** 18 LLM System Design · 19 Production Debugging · 20 Behavioral & FDE
 
 ## Your edge 🌟
-Topics **05 (Agents)**, **06 (MCP & Custom Skills)**, and **13 (Agentic Coding Tools)** are where you stand out from most candidates. Invest in one flagship build story there.
+Topics **05 (Agents)**, **06 (MCP & Custom Skills)**, **13 (Agentic Coding Tools)**, **21 (Context Engineering)**, and **22 (Multi-Agent Orchestration)** are where you stand out from most candidates. Invest in one flagship build story there.
 
 ## Study with the skill
 This repo ships a Claude Code skill: **`/interview-prep`**. Use it to study a topic, quiz yourself, fill in `concepts.md`/`cheatsheet.md`, run a mock interview, or check progress. See [`.claude/skills/interview-prep/SKILL.md`](.claude/skills/interview-prep/SKILL.md).
