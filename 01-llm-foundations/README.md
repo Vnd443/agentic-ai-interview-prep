@@ -11,6 +11,10 @@ Every GenAI interview starts here. If you can't explain tokens, context windows,
 
 ## Subtopics checklist
 - [ ] Tokenization & how autoregressive generation works
+- [ ] **Transformer architecture & self-attention (Q/K/V), multi-head, positional encoding**
+- [ ] **Architecture flavors: decoder-only vs encoder-only vs encoder-decoder (and why)**
+- [ ] **Training lifecycle: pretraining → SFT → RLHF/DPO**
+- [ ] **How this differs from traditional NLP (one model, zero-shot vs one model per task)**
 - [ ] Context window, what overflow does, 'lost in the middle'
 - [ ] Decoding params: temperature, top_p, top_k, greedy vs. sampling
 - [ ] Why hallucinations happen + how to reduce them (layered defence)
@@ -39,8 +43,8 @@ Every GenAI interview starts here. If you can't explain tokens, context windows,
 - **projects/** — project ideas ranked by resume impact (build 1-2 you can demo).
 
 ## Status
-- [ ] Concepts drafted (`concepts.md`)
-- [ ] Cheatsheet filled (`cheatsheet.md`)
+- [x] Concepts drafted (`concepts.md`)
+- [x] Cheatsheet filled (`cheatsheet.md`)
 - [ ] Q&A rehearsed out loud (`interview-qa.md`)
 - [ ] Project built / mapped (`projects/`)
 - [ ] Can teach this topic from memory

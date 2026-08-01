@@ -47,6 +47,26 @@
 
 ---
 
+## Q4. Explain the transformer / self-attention like I'm not an ML expert.
+
+**Ideal answer:** A transformer reads all the tokens at once and uses **self-attention** to let each token look at every other token and decide which ones matter for what comes next. Mechanically, each token produces three vectors — a **Query** (what it's looking for), a **Key** (what it offers), and a **Value** (what it contributes). You match each Query against all Keys to get relevance weights, then blend the Values by those weights — a soft, learned lookup over the sequence. **Multi-head** attention runs several of these in parallel so different heads capture different relationships, and **positional encoding** adds word order since there's no left-to-right recurrence. The big win over older RNNs is that it's **parallel** and captures **long-range dependencies**, which is what let it scale into today's LLMs.
+
+**🔑 Power move:** "The key insight is parallelism plus attention — RNNs processed one token at a time and lost long-range context; transformers look at everything at once."
+
+**Follow-ups:** Decoder-only vs encoder-only vs encoder-decoder (and which for chat/embeddings)? · What does 'masked' attention mean in a decoder? · Why positional encoding?
+
+---
+
+## Q5. Walk me through how an LLM is trained (pretraining → SFT → RLHF).
+
+**Ideal answer:** Three stages. **Pretraining** — next-token prediction over massive unlabeled text; this is where the model gets its knowledge and raw capability, and it's the expensive part. **SFT (supervised fine-tuning)** — train on curated instruction→response pairs so it actually follows instructions instead of just continuing text. **RLHF or DPO** — align it to human preferences so it's helpful, harmless, and honest, using a reward model + RL or Direct Preference Optimization. Short version: pretraining gives it knowledge, SFT gives it obedience, RLHF gives it manners.
+
+**🔑 Power move:** "Language and knowledge come from pretraining — fine-tuning only shapes behavior. That's why RAG, not fine-tuning, is usually the right fix for *knowledge* gaps." (bridges to [[07-fine-tuning]] and [[04-rag]])
+
+**Follow-ups:** Where does fine-tuning fit vs RAG? · What's DPO vs RLHF? · Why can't you just pretrain and ship?
+
+---
+
 ## Your notes / STAR angle
 - Where in your IBM work did you reduce hallucinations? What did the rate drop from → to?
 - _TODO: capture one concrete story._

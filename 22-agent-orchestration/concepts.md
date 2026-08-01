@@ -12,6 +12,20 @@ Anthropic's guidance (widely cited): **start with the simplest thing that works*
 
 ---
 
+## Diagram — orchestrator–worker (the flagship pattern)
+```mermaid
+flowchart TB
+    U[Task] --> L[Orchestrator / lead agent]
+    L -->|decompose + delegate| W1[Worker 1<br/>own context]
+    L --> W2[Worker 2<br/>own context]
+    L --> W3[Worker 3<br/>own context]
+    W1 --> S[Synthesize]
+    W2 --> S
+    W3 --> S
+    S --> O[Final answer]
+```
+> The real win is **context isolation** — each worker explores in its own window; only a compressed result crosses back. Cost ≈ 10–15× a single chat, so earn it.
+
 ## 1. Workflows vs. Agents (know the distinction)
 
 - **Workflow** — LLM steps orchestrated through **predefined code paths** (deterministic control flow you wrote). Predictable, cheaper, easier to debug.

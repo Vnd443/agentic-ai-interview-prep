@@ -4,6 +4,19 @@
 
 ---
 
+## Diagram — the 4 levers around the window
+```mermaid
+flowchart TB
+    subgraph W [Context window · the budget]
+        SYS[System prompt] --- TOOLS[Tool defs] --- RAG[Retrieved] --- MEM[Memory] --- HIST[History]
+    end
+    WRITE[Write: offload to external state] -.-> W
+    SEL[Select: pull in only what's needed] -.-> W
+    COMP[Compress: summarize / prune] -.-> W
+    ISO[Isolate: sub-agent contexts] -.-> W
+```
+> Treat the window like RAM: **Write · Select · Compress · Isolate**. Biggest silent hog = raw tool outputs.
+
 ## 1. The core mental model: context is a budget
 
 The context window is finite (e.g. 200K tokens) and **every token competes**. More context is *not* better — irrelevant, stale, or contradictory tokens actively hurt accuracy. Treat the window like RAM: you're deciding what to page in, what to keep resident, and what to evict.
