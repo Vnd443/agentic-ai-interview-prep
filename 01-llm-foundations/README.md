@@ -10,22 +10,42 @@
 Every GenAI interview starts here. If you can't explain tokens, context windows, and why models hallucinate, nothing else lands. It's also the base you build RAG, agents, and cost answers on.
 
 ## Subtopics checklist
-- [ ] Tokenization & how autoregressive generation works
-- [ ] **Transformer architecture & self-attention (Q/K/V), multi-head, positional encoding**
-- [ ] **Architecture flavors: decoder-only vs encoder-only vs encoder-decoder (and why)**
-- [ ] **Training lifecycle: pretraining → SFT → RLHF/DPO**
-- [ ] **How this differs from traditional NLP (one model, zero-shot vs one model per task)**
-- [ ] Context window, what overflow does, 'lost in the middle'
+_Big picture_
+- [ ] AI → ML → GenAI → LLM (the family tree)
+- [ ] What an LLM / foundation model is
+- [ ] Where NLP fits
+- [ ] Generative AI vs Traditional ML
+
+_Basics_
+- [ ] Tokens
+- [ ] Embeddings (meaning → numbers)
+
+_How it works inside_
+- [ ] Autoregressive generation
+- [ ] Parameters & scale (7B/70B)
+- [ ] Transformer & self-attention (Q/K/V, multi-head, positional encoding)
+- [ ] Architecture flavors: decoder-only vs encoder-only vs encoder-decoder (and why)
+- [ ] Training lifecycle: pretraining → SFT → RLHF/DPO
+- [ ] GPT = Generative Pre-trained Transformer + model families (GPT/Claude/Llama/Gemini, open vs closed)
+- [ ] Types by size/specialty: LLM / SLM / MoE / reasoning / multimodal
+- [ ] In-context learning (zero / one / few-shot)
+
+_Using it_
+- [ ] Context window, overflow, 'lost in the middle'
 - [ ] Decoding params: temperature, top_p, top_k, greedy vs. sampling
 - [ ] Why hallucinations happen + how to reduce them (layered defence)
 - [ ] Perplexity, log-probs, self-consistency
-- [ ] Prompt vs. completion tokens → cost/latency
+
+_Engineering disciplines_
+- [ ] Prompt vs Context vs Loop vs Orchestration engineering
+- [ ] The agent loop (looping)
+- [ ] Memory — types (episodic/semantic/procedural), storage techniques, challenges
 
 ## Suggested learning flow
-1. Read/skim a primary resource in `resources.md`.
-2. Write the core ideas in your own words in `concepts.md`.
-3. Distil the must-knows + one-liners into `cheatsheet.md`.
-4. Practice out loud from `interview-qa.md` (answer, then check).
+1. Read `concepts.md` top-to-bottom (definition → example → why it matters).
+2. In `cheatsheet.md`, write your own one-line explanation next to each topic — that's your recall test.
+3. Practice out loud from `interview-qa.md` (answer, then check); add any interesting question using the template.
+4. Skim a primary resource in `resources.md` to go deeper where needed.
 5. Build (or map an existing) project in `projects/` and attach a STAR story.
 6. Update **Status** below and log a mock answer in `../00-START-HERE/MOCK-INTERVIEW-LOG.md`.
 
@@ -36,9 +56,9 @@ Every GenAI interview starts here. If you can't explain tokens, context windows,
 
 ## Files in this folder
 - **README.md** — this file: what/why, subtopics, flow, interview angles, status.
-- **concepts.md** — your study notes; explain each idea like you would to an interviewer.
-- **cheatsheet.md** — must-know terms, power-move one-liners, numbers to quote.
-- **interview-qa.md** — Q -> ideal answer -> power move -> follow-ups.
+- **concepts.md** — learn-first notes. Each concept = plain **definition → example (or diagram/code) → why it matters**. Read top-to-bottom the first time.
+- **cheatsheet.md** — just the topic list; write your own one-line explanation next to each.
+- **interview-qa.md** — simple **Q → answer** format; copy the template to add your own.
 - **resources.md** — docs, papers, videos, blogs.
 - **projects/** — project ideas ranked by resume impact (build 1-2 you can demo).
 

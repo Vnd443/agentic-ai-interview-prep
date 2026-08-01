@@ -36,11 +36,14 @@ Match their request to one of the modes below. If it's ambiguous, ask one short 
 4. Log the session to `MOCK-INTERVIEW-LOG.md` (use its template).
 
 ### Mode: FILL CONTENT
-When asked to populate `concepts.md`, `cheatsheet.md`, `interview-qa.md`, or `projects/README.md`:
-- Keep the existing structure/headings.
-- Write in the user's first-person voice, interview-ready, concise, with **numbers and concrete examples**.
+When asked to populate `concepts.md`, `cheatsheet.md`, `interview-qa.md`, or `projects/README.md`, follow the **house style** (set on topic 01 — match it everywhere):
+- **`concepts.md` — learn-first, human-friendly.** Each concept is a numbered section: **plain-language definition → a concrete example (or diagram/code) → "why it matters" interview angle.** Simple enough to understand on the first read; no reference-doc density, no duplication with the cheatsheet. Keep/add diagrams (Mermaid for flows, ASCII for layer stacks). Topics with their own deep folder (embeddings, prompt/context/orchestration) get a short intro + a `[[link]]` pointer, not a duplicate.
+- **`cheatsheet.md` — topic skeleton only.** Just the list of topics grouped into sections, each with a trailing `—` for the user to write their own one-line explanation. Do **not** pre-fill the explanations; the user does that manually to test recall.
+- **`interview-qa.md` — simple Q/A.** A copy-paste template at the top, then each entry = **`**Q. …?**`** on one line, a blank line, then the answer in one plain paragraph on the next line. No Power-move / Follow-ups sub-headings (fold the key one-liner into the answer). Keep markdown minimal — the user isn't comfortable with heavy formatting.
+- Write in the user's first-person voice where relevant, interview-ready, concise, with **numbers and concrete examples**.
 - For the 10 guide-mapped topics, stay consistent with `AI_Engineer_Interview_Guide.pdf` (read it if unsure).
 - Never fabricate the user's personal experience — mark unknowns as `_TODO: your story_` and ask.
+- **Confirm on topic 01 before mass-applying** a style change to other topics.
 
 ### Mode: PROGRESS / PLANNING
 - Read `PROGRESS-TRACKER.md`; summarise where they are; suggest the next topic per the 5-phase flow in `MASTER-ROADMAP.md`.
