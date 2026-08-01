@@ -18,7 +18,10 @@ AI  ── machines doing "smart" things
              └─ LLMs ── GenAI for text (ChatGPT, Claude, Llama)
 ```
 
-**Example:** "Detect spam" is plain ML. "Write me an email" is GenAI. "Write me an email using GPT" is an LLM.
+**Example — Netflix:**
+- Guessing which movie *you'll* like from your watch history → **ML**.
+- Writing a fresh one-line description of that movie, just for you → **GenAI**.
+- If the thing writing it is a *text* model like ChatGPT → an **LLM**.
 
 **Why it matters:** Interviewers open with *"where does GenAI sit in AI?"* — this ladder is the clean answer. **GenAI is a slice of deep learning that generates content; LLMs are the text slice of GenAI.**
 
@@ -28,7 +31,7 @@ AI  ── machines doing "smart" things
 
 **Definition:** A **Large Language Model** is a program trained on huge amounts of text that does one thing — **guess the next word** (token) over and over. It's also called a **foundation model** because one model can be reused for many tasks (chat, summarize, code) without retraining.
 
-**Example:** You type `"The capital of France is"` → it predicts `"Paris"`. You type `"def add(a, b): return"` → it predicts `"a + b"`. Same model, different tasks.
+**Example — your phone keyboard:** you type *"I'm running late, I'll be there in five"* and it suggests **"minutes."** That's next-word prediction. An LLM is the exact same trick, scaled up billions of times — so it predicts not just the next word, but whole emails, answers, and code.
 
 **Why it matters:** Everything an LLM does — answering, coding, reasoning — is this one next-word skill dressed up. If you remember nothing else: **it predicts likely text, it does not "know" facts.**
 
@@ -38,7 +41,7 @@ AI  ── machines doing "smart" things
 
 **Definition:** **NLP (Natural Language Processing)** is the whole field of getting computers to work with human language — translation, sentiment, summarization, question-answering. LLMs are simply the **modern, dominant way** to do NLP.
 
-**Example:** "Is this review positive or negative?" used to need a custom-trained NLP classifier. Today you just ask an LLM. Same NLP *task*, new *tool*.
+**Example:** **Google Translate** (English → Hindi) and **Gmail's spam filter** are both NLP. Before, each needed its own special model. Now one LLM does translation, summarizing, and answering — all the classic NLP jobs — just by asking.
 
 **Why it matters:** If asked *"how is this different from old NLP?"* → *"Old NLP built one narrow model per task; LLMs are one general model that does most NLP tasks out of the box via prompting."*
 
@@ -48,9 +51,9 @@ AI  ── machines doing "smart" things
 
 **Definition:** Traditional ML **picks a label** ("spam / not spam"). Generative AI **creates new content** that looks like its training data.
 
-**Example:**
-- Traditional ML: email in → `"spam"` (one of a fixed set of answers).
-- GenAI: `"write a reply declining this meeting"` → a brand-new paragraph that never existed before.
+**Example — two machines:**
+- Traditional ML = a **sorting machine**: reads an email, drops it into *spam* or *inbox* (picks from fixed options).
+- GenAI = a **writer**: you say *"reply politely declining"* and it writes brand-new sentences that never existed before.
 
 | | Traditional ML | Generative AI |
 |---|---|---|
@@ -71,6 +74,20 @@ AI  ── machines doing "smart" things
 - `"unbelievable"` → 3 tokens: `un` + `believ` + `able`
 - `"The cat sat."` → about 4 tokens
 
+**Code — see it yourself** (`pip install tiktoken`):
+```python
+import tiktoken
+encoder = tiktoken.encoding_for_model("gpt-4o")
+
+# Tokenization: text → token IDs
+tokens = encoder.encode("Hello There!!, I am VND")
+print(tokens)   # [13225, 3274, 2618, 11, 357, 939, 631, 17538]  → 8 tokens
+
+# Detokenization: token IDs → text
+print(encoder.decode(tokens))   # "Hello There!!, I am VND"
+```
+Notice `"!!,"` and `"VND"` each split into their own pieces — the model literally sees those numbers, not the letters.
+
 **Why it matters:** You are **billed per token**, and the memory limit is measured in tokens. A 10-page doc ≈ 5,000 tokens — that's what you pay for and what fills the window.
 
 ---
@@ -79,10 +96,8 @@ AI  ── machines doing "smart" things
 
 **Definition:** An **embedding** is a list of numbers (a vector) that captures the *meaning* of text, so things with similar meaning end up **close together** in number-space.
 
-**Example:**
-- `"dog"` and `"puppy"` → vectors that are **near** each other.
-- `"dog"` and `"car"` → vectors that are **far apart**.
-- Famous one: `king − man + woman ≈ queen` (the math actually works on meanings).
+**Example — a map of meaning:** just like cities sit on a map, words sit on this number-map by *meaning*. **"coffee" and "tea"** land close together; **"coffee" and "football"** land far apart. Search then just means "find the nearest neighbours on the map."
+*(Classic party trick: `king − man + woman ≈ queen` — the math actually works on meanings.)*
 
 **Why it matters:** This is how **search and RAG** work — turn your question and your documents into vectors, then find the closest ones. Foundational for topic [[03-embeddings-vector-search]]. Interview line: *"Embeddings turn meaning into geometry so 'similar' becomes 'close'."*
 
@@ -120,7 +135,7 @@ flowchart LR
 
 **Definition:** **Parameters** are the numbers (weights) the model learned during training. "7B" = 7 billion of them. More parameters = more capacity, but more cost and slower.
 
-**Example:** Llama comes in **8B** (small, cheap, fast) and **70B** (smarter, pricier). GPT-3 was **175B**. Rule of thumb: use the **smallest model that passes your quality bar**.
+**Example:** Think of parameters like **brain cells** — more can learn more, but cost more to run. Llama comes in **8B** (small, fast, cheap) and **70B** (bigger "brain," pricier); GPT-3 had **175B**. Rule of thumb: use the **smallest model that passes your quality bar**.
 
 **Why it matters:** Ties straight to cost. Interview line: *"I match model size to task difficulty — small model for classification, big model only for hard reasoning."* (→ [[09-cost-optimization]])
 
@@ -173,6 +188,8 @@ flowchart LR
 1. **Pretraining** — read the internet, predict the next word → gains **knowledge**. (The expensive part.)
 2. **SFT (Supervised Fine-Tuning)** — show it good `question → answer` examples → learns to **follow instructions**.
 3. **RLHF** (Reinforcement Learning from Human Feedback) **/ DPO** (Direct Preference Optimization) — humans rank answers, model learns the preferred style → becomes **helpful, harmless, honest**. (DPO is the newer, simpler alternative — it skips RLHF's separate reward model and trains directly on the "A is better than B" pairs.)
+
+**Example — like onboarding a new employee:** pretraining = they read everything about the field (general knowledge); SFT = you show them exactly how the job is done (worked examples); RLHF = you give feedback on their drafts until their style is right.
 
 **Diagram:**
 ```mermaid
@@ -232,7 +249,7 @@ So "GPT" isn't magic — it's a decoder-only transformer that was pre-trained an
 
 **Definition:** LLMs can learn a task **from examples in the prompt** — no retraining. Give it examples in the message and it copies the pattern.
 
-**Example — few-shot classification:**
+**Example:** it's like handing a **new intern two invoices you've already filled in**, then giving them a blank one — they copy the pattern without any training. Same idea in a prompt:
 ```
 Classify the sentiment.
 
@@ -254,7 +271,7 @@ The model outputs `Neutral` — it learned the format from your 2 examples.
 
 **Definition:** The **context window** is the model's short-term memory — the max tokens it can consider at once, counting **your prompt + its answer together**.
 
-**Example:** A 200K-token window ≈ **150,000 words** ≈ a 500-page book. If you paste more than fits, the **oldest text silently falls off** — no error, the model just can't see it.
+**Example — the model's desk:** only so many papers fit on the desk. A 200K-token window ≈ a **500-page book**. Put down more than fits and an old page falls off the edge — the model simply can't see what fell off (no error, it just silently drops).
 
 **"Lost in the middle":** even inside the window, the model remembers the **start and end** better than the **middle**. Put critical instructions at the top or bottom.
 
@@ -266,9 +283,9 @@ The model outputs `Neutral` — it learned the format from your 2 examples.
 
 **Definition:** After the model has the probabilities, these settings control **how it picks** the next token — more predictable vs more creative.
 
-**Example — same prompt `"Write a coffee tagline"`:**
-- `temperature = 0` → same safe answer every time: *"Great coffee, every day."*
-- `temperature = 1` → varied, creative: *"Sip the sunrise."*, *"Fuel your chaos."*
+**Example — a creativity dial** (same prompt: *"Write a coffee tagline"*):
+- `temperature = 0` → a **cautious accountant**: the same safe answer every time — *"Great coffee, every day."*
+- `temperature = 1` → a **brainstorming artist**: something different each time — *"Sip the sunrise."*, *"Fuel your chaos."*
 
 ```python
 # Factual task → low temperature
@@ -290,7 +307,7 @@ client.chat(prompt, temperature=0.9)    # varied, creative
 
 **Definition:** A **hallucination** is when the model states something false **confidently**. It happens because the model produces *likely-sounding* text, not *true* text — and it has no built-in "I don't know."
 
-**Example:** Ask *"Which two Nobel Prizes did Einstein win?"* — he won **one** (Physics, 1921). But a confident answer is statistically "more likely" than admitting there was only one, so the model may **invent a second prize**.
+**Example:** It's like a **student in an exam who didn't study but won't leave the answer blank** — they write a confident, wrong answer because a fluent guess feels better than "I don't know." The model does the same: it would rather *sound* right than admit it doesn't know.
 
 **How to reduce it (layers, not one trick):**
 1. **RAG** — give it the real documents, say "answer only from these."
