@@ -1,12 +1,12 @@
 # 🚀 AI / GenAI / Agentic — Interview Prep Roadmap
 
-A structured, resume-driven study plan for **Venna Naga Durgaprasad** (GenAI & Agentic AI Engineer, IBM), targeting AI Specialist / AI Integration / GenAI Engineer / Agentic AI Engineer / Forward Deployed Engineer roles.
+A structured study plan for AI Specialist / AI Integration / GenAI Engineer / Agentic AI Engineer / Forward Deployed Engineer roles.
 
 ## 👉 Start here
 **[`00-START-HERE/MASTER-ROADMAP.md`](00-START-HERE/MASTER-ROADMAP.md)** — the plan, the 25 topics, and the group-by-group study flow.
 
 ## How it's organized
-**25 topic folders at the repo root**, numbered `01`–`25` in the order of the **9-phase learning roadmap** at [balajichippada.com](https://balajichippada.com/) (interview-only topics last). Layout is **topic folder → subtopics checklist** — no group folders; the phases are just study order, tracked in `MASTER-ROADMAP.md`.
+**25 topic folders at the repo root**, numbered `01`–`25` in the order of a **9-phase learning roadmap** (interview-only topics last). Layout is **topic folder → subtopics checklist** — no group folders; the phases are just study order, tracked in `MASTER-ROADMAP.md`.
 ```
 ROADMAP & INTERVIEW-QA/
 ├─ README.md                        ← you are here
@@ -26,9 +26,7 @@ ROADMAP & INTERVIEW-QA/
 │    ├─ cheatsheet.md     ← recall skeleton (fill the blanks yourself)
 │    ├─ interview-qa.md   ← Q → answer → copy-paste template
 │    ├─ resources.md      ← docs/papers/videos
-│    └─ projects/         ← project ideas ranked by resume impact
-├─ AI_Engineer_Interview_Guide.pdf   ← source for seeded Q&A
-└─ Venna_Naga_DurgaPrasad_Resume.pdf ← source for topic mapping
+│    └─ projects/         ← project ideas ranked by impact
 ```
 
 ## The 25 topics (flat, in phase order)
