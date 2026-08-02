@@ -18,3 +18,6 @@ __pycache__/
 
 # Playwright MCP scratch output
 .playwright-mcp/
+
+# Personal study tracker (local only — my video-watching progress)
+SITE-VIDEO-TRACKER.md
