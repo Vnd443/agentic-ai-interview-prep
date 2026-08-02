@@ -22,6 +22,7 @@
 - Token/window fundamentals → [[02-llm-foundations]]
 
 ## Watch/skim
+- **Roadmap video — 3.3 Context Engineering** (balajichippada.com) — https://www.youtube.com/watch?v=fGfTj5NoM7k
 - Conference talks on "context engineering for agents" (2025–2026) — search recent talks.
 
 _TODO: after reading, paste your 3 best links + one takeaway each here._

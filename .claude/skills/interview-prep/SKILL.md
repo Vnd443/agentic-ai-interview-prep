@@ -31,7 +31,8 @@ Match their request to one of the modes below. If it's ambiguous, ask one short 
 ### Mode: STUDY a topic
 1. Read that topic's `README.md`, `concepts.md`, `interview-qa.md`.
 2. Explain the topic clearly, tied to the subtopics checklist. Use the guide's "power move" one-liners where relevant.
-3. Offer to draft/expand `concepts.md` (in the user's voice, first-person, interview-ready) and distil `cheatsheet.md`. Only write files when the user agrees.
+3. Also read the topic's `resources.md` — if it lists a **Roadmap video (balajichippada.com)**, share that link so the user can watch it alongside studying. (Only some modules have a published video; the full watch-log is `SITE-VIDEO-TRACKER.md`, local/git-ignored.)
+4. Offer to draft/expand `concepts.md` (in the user's voice, first-person, interview-ready) and distil `cheatsheet.md`. Only write files when the user agrees.
 
 ### Mode: QUIZ / drill
 1. Pull questions from the topic's `interview-qa.md` (or generate new ones in the same style).
