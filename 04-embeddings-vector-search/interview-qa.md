@@ -1,42 +1,46 @@
 # Embeddings & Vector Search — Interview Q&A
 
+> Simple format. To add a new question, just copy this and fill it in:
+>
+> **Q. your question?**
+>
+> your answer in plain words.
+>
+> ---
+
 > Source flagged: **AI_Engineer_Interview_Guide.pdf → Q07 (Embeddings & Vector Search)**.
 
 ---
 
-## Q1. Explain embeddings and how you'd use them in production. ⭐ (guide Q07)
+**Q1. Explain embeddings and how you'd use them in production. ⭐ (guide Q07)**
 
-**Why they ask:** Embeddings underpin search, recommendations, and RAG. Deep understanding signals strong fundamentals.
-
-**Ideal answer:**
-- **What they are** — dense vector representations of text (or images/audio) where semantically similar items are close in vector space. They capture *meaning*, not keywords.
-- **How they work** — a neural net maps input to a fixed-size vector (e.g. 1536-dim). **Cosine similarity / dot product** between vectors measures semantic closeness ("King" is nearer "Queen" than "Bicycle").
-- **Production use cases** — semantic search, RAG retrieval, duplicate detection, recommendations, clustering/topic modelling, text anomaly detection.
-- **Choosing a model** — weigh dimensionality (higher = more expressive but slower/costlier), domain fit, multilingual support, and cost. **Benchmark on YOUR data**, not just MTEB leaderboards.
-- **Scaling** — beyond a few hundred thousand vectors, exact search is too slow; use **ANN** indexes (**HNSW**, IVF). Pick the index for your recall/latency trade-off.
-
-**🔑 Power move:** In a whiteboard, *draw it*: `query → embed → ANN search → top-k → re-rank → generate`. Visual communication is a differentiator.
-
-**Follow-ups:**
-- Cosine vs. dot product vs. Euclidean — when each?
-- HNSW vs. IVF trade-offs? → HNSW: great recall/latency, more memory; IVF: cheaper memory, tune nprobe.
-- Why benchmark on your own data over MTEB?
+An embedding is a dense vector that captures the *meaning* of text (or images/audio), so semantically similar items sit close together in vector space — it captures meaning, not keywords. A neural net maps each input to a fixed-size vector (e.g. 1536-dim), and cosine similarity or dot product between vectors measures closeness. In production I use them for semantic search, RAG retrieval, deduplication, recommendations, and clustering. Choosing a model, I weigh dimensionality, domain fit, language, and cost, and I benchmark on my own data rather than trusting the MTEB leaderboard alone. Past a few hundred thousand vectors, exact search is too slow so I switch to an ANN index (HNSW or IVF). The power move is to *draw it* on the whiteboard: query → embed → ANN search → top-k → re-rank → generate.
 
 ---
 
-## Q2. How does approximate nearest neighbour (ANN) search work, and what do you trade off?
+**Q2. Cosine vs dot product vs Euclidean — when do you use each?**
 
-**Ideal answer:** ANN trades a little **recall** for a huge **speed/memory** win vs. brute-force exact search. **HNSW** builds a navigable small-world graph you greedily traverse; **IVF** clusters vectors and only searches the nearest clusters (`nprobe` controls how many). You tune parameters to hit a recall target within a latency budget.
-
-**Follow-ups:** What happens to recall as you lower `efSearch`/`nprobe`? How do you re-index on updates?
+Cosine measures the angle between vectors, so it compares meaning-direction and ignores length — my default for text, because a short tweet and a long essay on the same topic should still count as similar. Dot product factors in magnitude too, so longer vectors score higher; it's equivalent to cosine when vectors are normalized. Euclidean is straight-line distance and can be misled by length differences. Rule of thumb: normalize and use cosine/dot for text unless the model was trained for a specific metric.
 
 ---
 
-## Q3. How do you keep an embedding index fresh and consistent?
+**Q3. How does approximate nearest neighbour (ANN) search work, and what's the trade-off?**
 
-**Ideal answer:** Store chunk + metadata + a content hash; upsert on change, delete on removal. Watch for **embedding-model version drift** — if you change the embedding model you must re-embed the whole corpus (query and doc vectors must come from the same model). Batch re-embeds; keep the model version in metadata.
+ANN trades a little recall for a huge speed and memory win over brute-force exact search. HNSW builds a multi-layer "small-world" graph you traverse greedily — like taking express subway lines to get near, then local stops; great recall and latency but memory-hungry, tuned with `efSearch`. IVF clusters vectors into buckets and only searches the nearest ones — like only walking the closest city districts; cheaper memory, tuned with `nprobe`. Lowering `efSearch`/`nprobe` speeds things up but drops recall, so I tune to hit a recall target within a latency budget.
+
+---
+
+**Q4. How do you keep an embedding index fresh and consistent?**
+
+I store each chunk with metadata and a content hash, upsert on change and delete on removal, and skip unchanged chunks by hash. The big rule is embedding-model version drift: if I change the embedding model I must re-embed the entire corpus, because query and document vectors have to come from the same model — mixing versions is like comparing addresses from two different maps. So I keep the model version in metadata and batch-reprocess on any upgrade.
+
+---
+
+**Q5. Which vector database would you choose, and why?**
+
+It depends on scale and existing stack. For a smaller app I'd use pgvector so I don't run a second database — it bolts a vector column onto the Postgres I already have. At large scale, or when I need heavy filtering and ops features, I'd use a purpose-built store like Pinecone (managed), Qdrant, or Weaviate. Either way I lean on metadata filtering to restrict by tenant/date before ranking — it fixes most relevance problems and enforces security so one user can't retrieve another's documents.
 
 ---
 
 ## Your notes / STAR angle
-- _TODO: which embedding model + vector DB you used and why._
+- _TODO: which embedding model + vector DB you used and why (corpus size, dims, recall/latency numbers)._

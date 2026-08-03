@@ -1,46 +1,52 @@
 # RAG (Retrieval-Augmented Generation) — Interview Q&A
 
+> Simple format. To add a new question, just copy this and fill it in:
+>
+> **Q. your question?**
+>
+> your answer in plain words.
+>
+> ---
+
 > Source flagged: **AI_Engineer_Interview_Guide.pdf → Q04 (RAG Architecture)**.
 
 ---
 
-## Q1. Walk me through how you'd design a RAG pipeline. ⭐ (guide Q04)
+**Q1. Walk me through how you'd design a RAG pipeline. ⭐ (guide Q04)**
 
-**Why they ask:** RAG is the most common production LLM pattern. Can't design it end-to-end → struggle in any applied role.
-
-**Ideal answer — the full pipeline:**
-1. **Document ingestion** — parse (PDF/HTML/DB), clean, and split into semantic **chunks**. Chunk size matters: too small loses context, too large dilutes relevance. Typically **200–500 tokens with overlap**.
-2. **Embedding & indexing** — embed chunks (e.g. `text-embedding-3-small` or open-source), store in a vector DB (Pinecone, Weaviate, pgvector, Qdrant) **with metadata** for filtering.
-3. **Retrieval** — embed the query, similarity search (cosine/dot product), retrieve **top-k**. Consider **hybrid search** (vector + BM25 keyword) for better recall.
-4. **Re-ranking** — raw retrieval isn't enough. A **cross-encoder reranker** (Cohere Rerank, BGE) re-scores the top-k for true relevance. Big precision win.
-5. **Generation** — feed reranked context + query to the LLM with a system prompt that says *answer only from context and cite sources*.
-6. **Evaluation loop** — measure retrieval recall, answer **faithfulness** (matches source?), and answer relevance. Use RAGAS or a custom eval suite.
-
-**🔑 Power move:** "Call out **re-ranking as its own step** — most candidates skip it, and it's what separates a toy RAG from a production one."
-
-**Follow-ups:**
-- Chunking strategy for tables / code / long docs? → structure-aware or hierarchical chunking.
-- Why hybrid search over pure vector? → keyword recall for names, IDs, rare terms.
-- How do you cite sources / attribute answers?
-- What if retrieval returns nothing relevant? → abstain / "I don't know" rather than hallucinate.
+Six stages. First, ingestion: parse the docs (PDF/HTML/DB), clean them, and split into semantic chunks — usually 200–500 tokens with overlap, split structure-aware on headings. Second, embed each chunk and store it in a vector DB with metadata for filtering. Third, at query time embed the query and do a similarity search for the top-k, ideally hybrid (vector + BM25) so exact terms and IDs also match. Fourth — the step most people skip — re-rank the top-k with a cross-encoder to get true relevance, retrieving wide then narrowing down. Fifth, generation: feed the reranked context plus the query to the LLM with a system prompt that says answer only from context, cite sources, and abstain if it's not there. Sixth, an eval loop measuring retrieval recall, faithfulness, and answer relevance. The power move is calling out re-ranking as its own step — it's what separates a toy RAG from a production one.
 
 ---
 
-## Q2. RAG isn't returning relevant chunks. How do you debug it?
+**Q2. Why does RAG exist — why not just fine-tune the model on your data?**
 
-**Ideal answer:** Isolate the stage. Check **retrieval in isolation** (are the right chunks even in top-k? → chunking or embedding-model problem). If they are but the answer is bad → **generation/prompt** problem. Levers: better chunking, hybrid search, add a reranker, raise k then rerank down, query rewriting/expansion, metadata filtering.
-
-**🔑 Power move:** "I always measure retrieval and generation *separately* — most 'RAG is bad' issues are actually retrieval issues."
-
-**Follow-ups:** Retrieval recall vs. answer faithfulness — which failed? Query rewriting / HyDE?
+An LLM only knows its training data (parametric knowledge), which is stale, doesn't include private data, and can hallucinate. RAG gives it non-parametric knowledge by retrieving real documents at query time — it turns a closed-book exam into an open-book one. Fine-tuning changes style, format, or a narrow skill but doesn't reliably add facts, and you'd never run a training course just to tell someone today's price — you hand them the sheet. So the rule is: facts and freshness go to RAG, consistent behavior/format goes to fine-tuning, and I try prompting first, RAG second, fine-tune last.
 
 ---
 
-## Q3. When is RAG the wrong choice?
+**Q3. RAG isn't returning relevant chunks. How do you debug it?**
 
-**Ideal answer:** When the task needs *reasoning/style* not *facts* (fine-tune or prompt instead), when the knowledge fits in the context window (just include it), or when latency budget can't afford the retrieval hop. RAG adds moving parts — use it when grounding in a changing corpus is the actual requirement.
+I isolate the stage. First I check retrieval on its own: are the right chunks even in the top-k? If they're not, it's a retrieval problem — fix chunking, try a different embedding model, raise k then re-rank down, add hybrid search, or add metadata filters. If the right chunks are there but the answer is still wrong, it's a generation/prompt problem. A wrong open-book answer means either I opened the wrong page or misread the right one, and those are fixed very differently — so I always measure retrieval and generation separately. Most "RAG is bad" complaints are actually retrieval failures.
+
+---
+
+**Q4. What is re-ranking and why does it matter so much?**
+
+Vector retrieval is fast but imprecise — it grabs roughly-relevant chunks. A cross-encoder re-ranker reads each query-and-chunk pair together and re-scores true relevance, so I retrieve a wide top-k (say 50) then re-rank down to the best 5. It's like skimming titles to pull 50 books, then actually opening each to keep the 5 that really answer the question. It's slower per item, so I only run it on the shortlist — but it's the single biggest precision win in a RAG system and the detail most candidates miss.
+
+---
+
+**Q5. How do you evaluate a RAG system?**
+
+I use the RAG Triad and measure the legs separately, because a system can be faithful but irrelevant or relevant but ungrounded. Context relevance asks whether retrieval fetched the right chunks; groundedness/faithfulness asks whether the answer is actually supported by those chunks (no hallucination); answer relevance asks whether it addresses the question. For retrieval I also track Precision@k, Recall@k, MRR, and nDCG. Tools like RAGAS and LangSmith let me score these in a CI-style regression suite so quality doesn't drift.
+
+---
+
+**Q6. When is RAG the wrong choice?**
+
+When the task needs reasoning or style rather than facts (prompt or fine-tune instead), when the knowledge already fits in the context window (just include it directly), or when the latency budget can't afford the retrieval hop. RAG adds moving parts — a vector store, retrieval, re-ranking — so I use it specifically when the requirement is grounding answers in a large, changing, or private corpus, not as a default for everything.
 
 ---
 
 ## Your notes / STAR angle
-- _TODO: your production RAG system — corpus size, stack, eval numbers._
+- _TODO: your production RAG system — corpus size, stack, chunking choice, and eval numbers (recall / faithfulness before → after)._
