@@ -1,43 +1,46 @@
-# Production Debugging — Interview Q&A
+# Monitoring & Production Debugging — Interview Q&A
+
+> Simple format. To add a new question, just copy this and fill it in:
+>
+> **Q. your question?**
+>
+> your answer in plain words.
+>
+> ---
 
 > Source flagged: **AI_Engineer_Interview_Guide.pdf → Q03 (Production Debugging)**.
 
 ---
 
-## Q1. Your model works in testing but fails in production. What's going wrong? ⭐ (guide Q03)
+**Q1. Your model works in testing but fails in production. What's going wrong? ⭐ (guide Q03)**
 
-**Why they ask:** It proves you've actually *shipped*, not just run notebooks.
-
-**Ideal answer — systematic list of failure modes:**
-1. **Data drift** — prod inputs are messier (slang, typos, edge cases, new topics). Monitor input distributions; alert on drift.
-2. **Train–test leakage** — suspiciously good offline scores? Re-audit for overlap / temporal leakage in the eval set.
-3. **Evaluation mismatch** — offline metrics (F1, BLEU, perplexity) may not track what users care about. Build evals that reflect real satisfaction.
-4. **Prompt sensitivity** — real user phrasing varies far more than your test prompts; tiny wording changes swing outputs.
-5. **Latency & timeouts** — rate limits, timeouts, degradation under concurrent load. Profile under realistic traffic.
-6. **Context-window overflow** — prod conversations grow; overflow silently drops info → hard-to-diagnose degradation.
-
-**🔑 Power move (framework):** *"I'd set up three layers of monitoring — input-distribution tracking, output-quality scoring, and user-feedback loops — then systematically narrow the failure mode."*
-
-**Follow-ups:**
-- How do you detect drift concretely? → track embedding-space distribution, keyword/topic shift, out-of-vocab rate.
-- How do you catch context overflow before users do? → token-count alarms, conversation-length caps + summarisation.
-- What's your rollback / canary strategy?
+I walk a systematic checklist of failure modes rather than guessing. Data drift — production inputs are messier than my test set, with slang, typos, and new topics — so I monitor input distributions and alert on shift. Train-test leakage — if offline scores were suspiciously high, I re-audit the eval set for overlap or temporal leakage. Evaluation mismatch — offline metrics like F1 or BLEU may not track what users actually value, so I check the metric correlates with real satisfaction. Prompt sensitivity — real users phrase things far more variably than my clean test prompts, and small wording changes swing outputs. Latency and concurrency — rate limits, timeouts, and degradation under real load that never show up single-user. And context-window overflow — production conversations grow and silently drop information. The power move is the framework: I set up three layers of monitoring — input-distribution tracking, output-quality scoring, and user-feedback loops — then narrow the failure mode systematically.
 
 ---
 
-## Q2. How do you monitor an LLM system in production?
+**Q2. How do you monitor an LLM system in production?**
 
-**Ideal answer:** Log inputs/outputs (PII-redacted). Track latency (p50/p95/p99), error/timeout rate, token usage & cost, refusal/flag rate, and a rolling **quality score** (LLM-as-judge on a sample) plus explicit user feedback (👍/👎). Alert on deltas from baseline, not absolute thresholds.
-
-**Follow-ups:** What sampling rate for LLM-judge scoring? How do you close the feedback loop into evals?
+I log inputs and outputs with PII redacted, and track latency at p50, p95, and p99, error and timeout rate, token usage and cost, and refusal or flag rate. For quality I run a rolling LLM-as-judge score on a sample of traffic plus explicit user feedback like thumbs up and down. The key discipline is alerting on deltas from a rolling baseline rather than absolute thresholds, because gradual drift never trips a fixed line. And I version-stamp every request with the prompt and model version, so when quality shifts I can see exactly what changed and when. The mental model is three layers — input distribution, output quality, user feedback — so I'm watching the vitals, the lab samples, and what the user actually reports.
 
 ---
 
-## Q3. A user reports a bad answer you can't reproduce. What now?
+**Q3. A user reports a bad answer you can't reproduce. What do you do?**
 
-**Ideal answer:** Pull the exact logged request (prompt + retrieved context + params + model version). Non-determinism (temperature), a since-changed prompt/model version, or a stale retrieval are usual suspects. Reproduce with the logged inputs at temperature 0; diff against current pipeline. This is why request-level logging + version stamping matters.
+I pull the exact logged request — the prompt, the retrieved context, the parameters, and the model and prompt version that were live at that moment — and replay it at temperature 0. The usual suspects are non-determinism from a non-zero temperature, a prompt or model version that has since changed, or a stale retrieval that returned different chunks than it does now. Once I reproduce it with the logged inputs, I diff against the current pipeline to find what moved. This is exactly why request-level logging with version stamping matters — I can only debug what I logged, and it's my black box for replaying the incident instead of guessing.
+
+---
+
+**Q4. How do you detect data drift concretely?**
+
+I track the distribution of inputs, not just individual requests. Concretely that's watching for shift in embedding space — are incoming queries landing in different regions than my baseline — plus topic and keyword shift, and the out-of-vocabulary or new-entity rate. When those move beyond a threshold from baseline, I alert. The reason I lead with drift is that most "the model got worse" reports are actually the inputs changing while the model stayed the same, so measuring the inputs tells me whether to look at the data or the model.
+
+---
+
+**Q5. What does LLMOps add over classic MLOps?**
+
+MLOps already covers versioned models, pipelines, and deployment. LLMOps adds the LLM-specific concerns on top. Prompt versioning, because the prompt is part of the "code" and changes constantly. Handling non-determinism, since the same input can give different outputs run to run. Eval-in-production, because quality isn't a single accuracy number — I score a sample of live outputs continuously. And observability with tracing spans across a multi-step agent run, using something like LangSmith or Langfuse, so I can see the whole decision path. My rule that ties it together: a prompt change is a deploy, so it gets version tracking, a canary on a slice of traffic, and instant rollback, just like a code change.
 
 ---
 
 ## Your notes / STAR angle
-- _TODO: a "worked in dev, broke in prod" war story from IBM._
+- _TODO: a "worked in dev, broke in prod" war story — the failure mode, how you diagnosed it, and what monitoring you added so it wouldn't recur._

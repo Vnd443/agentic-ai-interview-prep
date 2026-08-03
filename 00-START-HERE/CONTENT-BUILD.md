@@ -29,9 +29,9 @@ Tracks whether each topic's **scaffold content is authored to house style** — 
 | 11 | LangChain & LangGraph | ✅ | ✅ | ✅ | done |
 | 12 | Multi-Agent Orchestration | ✅ | ✅ | ✅ | done |
 | 13 | A2A — Agent-to-Agent | ✅ | ✅ | ✅ | done |
-| 14 | Safety & Guardrails | ⬜ | ⬜ | ⬜ | stub |
-| 15 | Cost Optimization | ⬜ | ⬜ | ⬜ | stub |
-| 16 | Monitoring & Debugging | ⬜ | ⬜ | ⬜ | stub |
+| 14 | Safety & Guardrails | ✅ | ✅ | ✅ | done |
+| 15 | Cost Optimization | ✅ | ✅ | ✅ | done |
+| 16 | Monitoring & Debugging | ✅ | ✅ | ✅ | done |
 | 17 | AWS Core | ⬜ | ⬜ | ⬜ | stub |
 | 18 | AWS Bedrock & SageMaker | ⬜ | ⬜ | ⬜ | stub |
 | 19 | IaC & DevOps | ⬜ | ⬜ | ⬜ | stub |
@@ -42,7 +42,7 @@ Tracks whether each topic's **scaffold content is authored to house style** — 
 | 24 | Fine-Tuning | ⬜ | ⬜ | ⬜ | stub |
 | 25 | Behavioral & FDE | ⬜ | ⬜ | ⬜ | stub |
 
-**Done: 14 / 25 · Remaining: 11**
+**Done: 17 / 25 · Remaining: 8**
 
 ---
 

@@ -1,44 +1,46 @@
 # Safety & Guardrails — Interview Q&A
 
+> Simple format. To add a new question, just copy this and fill it in:
+>
+> **Q. your question?**
+>
+> your answer in plain words.
+>
+> ---
+
 > Source flagged: **AI_Engineer_Interview_Guide.pdf → Q10 (Safety & Alignment)**.
 
 ---
 
-## Q1. How do you ensure an AI system is safe for production? ⭐ (guide Q10)
+**Q1. How do you ensure an AI system is safe for production? ⭐ (guide Q10)**
 
-**Why they ask:** Safety isn't optional — regulators, legal, and users all care. Companies want engineers who build responsibly.
-
-**Ideal answer — layers:**
-1. **Input guardrails** — filter/flag harmful or adversarial inputs *before* the model: prompt-injection detection, PII detection, topic filtering; block/sanitise at the API gateway.
-2. **Output guardrails** — validate outputs *before* they reach users: PII leakage, harmful content, off-topic, policy violations. A secondary classifier or rules engine as a safety net.
-3. **Red teaming** — systematically try to break it: jailbreaks, **indirect prompt injection** (malicious content inside retrieved docs), data-extraction attacks, social engineering.
-4. **Monitoring & observability** — log inputs/outputs (PII-redacted), track refusal rate, flagged-content rate, user reports; alert on anomalous patterns.
-5. **Human-in-the-loop** — for high-stakes domains (medical, legal, financial), route uncertain/sensitive outputs to human review; design escalation so it fails *gracefully*, not dangerously.
-
-**🔑 Power move:** Reference real standards: *"I follow **OWASP's LLM Top 10** for threat modelling and **NIST's AI RMF** for risk management."* Signals maturity.
-
-**Follow-ups:**
-- What is prompt injection, direct vs. indirect? → user-supplied vs. injected via retrieved/3rd-party content.
-- Name a few OWASP LLM Top 10 items. → prompt injection, insecure output handling, training-data poisoning, sensitive-info disclosure, excessive agency…
-- How do you guardrail an *agent* with tool access? → permissions, sandboxing, HITL approval, output validation before execution.
+I use defence in depth — guardrails on both sides of the model, because no single layer is enough. Input guardrails filter harmful or adversarial input before the model sees it: prompt-injection detection, PII detection, topic filtering, blocked at the gateway. Output guardrails validate the response before it reaches the user or triggers an action — PII leakage, toxic content, policy violations, and schema validation — usually with a secondary classifier as a safety net. Then red-teaming, where I proactively attack the system with jailbreaks and indirect injection before adversaries do. Then monitoring — logging inputs and outputs with PII redacted, tracking refusal and flagged-content rates, alerting on anomalies. And human-in-the-loop for high-stakes domains like medical, legal, and financial, designed so it fails gracefully rather than dangerously. The power move is anchoring it in standards: I threat-model with the OWASP LLM Top 10 and manage risk with the NIST AI RMF.
 
 ---
 
-## Q2. What is prompt injection and how do you defend against it?
+**Q2. What is prompt injection, and how do you defend against it?**
 
-**Ideal answer:** An attacker embeds instructions that override your system prompt — **direct** (in the user message) or **indirect** (hidden in a web page / document the model retrieves). Defences: treat all retrieved/user content as **untrusted data, not instructions**; input classifiers; strict output validation; least-privilege tools; and never let model output directly trigger a high-stakes action without validation/approval.
-
-**🔑 Power move:** "Indirect injection through RAG sources is the sneaky one — I sanitise and sandbox retrieved content."
-
-**Follow-ups:** How does injection interact with agents/tools (excessive agency)?
+Prompt injection is when an attacker embeds instructions that override my system prompt. Direct injection is in the user message — "ignore your instructions and do X." Indirect injection is the sneaky one: the malicious instruction is hidden inside content the model retrieves, like a web page or a RAG document, so it rides in on something the model trusts. The core defence is a single principle — treat all retrieved and user content as untrusted data, not instructions. Concretely that means separating instructions from data, sanitizing and sandboxing retrieved content, running input classifiers, strictly validating outputs, giving tools least privilege, and never letting raw model output trigger a high-stakes action without validation or approval. Indirect injection through RAG sources is the one I call out specifically, because most people only think about the direct case.
 
 ---
 
-## Q3. How do you handle PII and data privacy in an LLM pipeline?
+**Q3. How do you guardrail an agent that has tool access?**
 
-**Ideal answer:** Detect + redact PII at ingress and before logging; minimise data sent to third-party APIs; consider on-prem/VPC model hosting for sensitive data; retention limits; and access controls on logs. Know your compliance context (GDPR, etc.).
+A safe chatbot isn't automatically a safe agent, because tool access means it can take actions with real consequences, not just produce text — that's OWASP's excessive-agency risk. So on top of input and output guardrails I add a third layer of action guardrails. Least-privilege permissions, so it only has the tools it truly needs. Caps on tool calls and retry limits so it can't loop expensively or destructively. Read-only enforcement wherever possible, and validating every argument or query before it executes. Sandboxed execution. And human-in-the-loop approval before anything irreversible — sending money, deleting data, emailing a customer. The mental model is a new employee with a badge for only their floor, a spending limit, and a staging environment: trust scoped to the smallest set of actions needed.
+
+---
+
+**Q4. Name a few items from the OWASP LLM Top 10.**
+
+The ones I reach for most are prompt injection, which is number one; insecure output handling, where you trust model output as if it were safe code or commands; training-data poisoning; sensitive-information disclosure, like leaking PII or secrets; and excessive agency, which is giving an agent more tool power than it needs. I use the list as a threat-modelling checklist rather than trying to recite all ten — the point is to walk through each category and ask "how could this system fail this way, and what's my control?" For risk management around that, I pair it with the NIST AI RMF's govern-map-measure-manage process.
+
+---
+
+**Q5. How do you handle PII and data privacy in an LLM pipeline?**
+
+I detect and redact PII at ingress and, critically, before anything gets logged, because logs are a privacy surface people forget about. I minimize the data sent to third-party APIs, and for sensitive data I consider on-prem or VPC-hosted models so nothing leaves our boundary — AWS Bedrock keeps data in-account, for example. I set retention limits and access controls on logs, and I work backward from the compliance context, whether that's GDPR or HIPAA. The framing I use is that privacy is a design constraint from the start, not something bolted on before launch.
 
 ---
 
 ## Your notes / STAR angle
-- _TODO: guardrails you implemented and a red-team finding you fixed._
+- _TODO: guardrails you implemented, a red-team finding you caught and fixed, and the standard (OWASP/NIST) you mapped it to._
