@@ -32,9 +32,9 @@ Tracks whether each topic's **scaffold content is authored to house style** — 
 | 14 | Safety & Guardrails | ✅ | ✅ | ✅ | done |
 | 15 | Cost Optimization | ✅ | ✅ | ✅ | done |
 | 16 | Monitoring & Debugging | ✅ | ✅ | ✅ | done |
-| 17 | AWS Core | ⬜ | ⬜ | ⬜ | stub |
-| 18 | AWS Bedrock & SageMaker | ⬜ | ⬜ | ⬜ | stub |
-| 19 | IaC & DevOps | ⬜ | ⬜ | ⬜ | stub |
+| 17 | AWS Core | ✅ | ✅ | ✅ | done |
+| 18 | AWS Bedrock & SageMaker | ✅ | ✅ | ✅ | done |
+| 19 | IaC & DevOps | ✅ | ✅ | ✅ | done |
 | 20 | Deployment & API Serving | ✅ | ✅ | ✅ | done |
 | 21 | Agentic Coding Tools | ⬜ | ⬜ | ⬜ | stub |
 | 22 | LLM System Design | ⬜ | ⬜ | ⬜ | stub |
@@ -42,7 +42,7 @@ Tracks whether each topic's **scaffold content is authored to house style** — 
 | 24 | Fine-Tuning | ⬜ | ⬜ | ⬜ | stub |
 | 25 | Behavioral & FDE | ⬜ | ⬜ | ⬜ | stub |
 
-**Done: 17 / 25 · Remaining: 8**
+**Done: 20 / 25 · Remaining: 5**
 
 ---
 
