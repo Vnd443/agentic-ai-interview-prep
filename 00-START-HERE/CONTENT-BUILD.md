@@ -36,13 +36,13 @@ Tracks whether each topic's **scaffold content is authored to house style** — 
 | 18 | AWS Bedrock & SageMaker | ✅ | ✅ | ✅ | done |
 | 19 | IaC & DevOps | ✅ | ✅ | ✅ | done |
 | 20 | Deployment & API Serving | ✅ | ✅ | ✅ | done |
-| 21 | Agentic Coding Tools | ⬜ | ⬜ | ⬜ | stub |
-| 22 | LLM System Design | ⬜ | ⬜ | ⬜ | stub |
-| 23 | Databases & SQL | ⬜ | ⬜ | ⬜ | stub |
-| 24 | Fine-Tuning | ⬜ | ⬜ | ⬜ | stub |
-| 25 | Behavioral & FDE | ⬜ | ⬜ | ⬜ | stub |
+| 21 | Agentic Coding Tools | ✅ | ✅ | ✅ | done |
+| 22 | LLM System Design | ✅ | ✅ | ✅ | done |
+| 23 | Databases & SQL | ✅ | ✅ | ✅ | done |
+| 24 | Fine-Tuning | ✅ | ✅ | ✅ | done |
+| 25 | Behavioral & FDE | ✅ | ✅ | ✅ | done · qa = STAR workbook |
 
-**Done: 20 / 25 · Remaining: 5**
+**Done: 25 / 25 · Remaining: 0 🎉**
 
 ---
 
