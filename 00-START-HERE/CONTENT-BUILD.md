@@ -22,11 +22,11 @@ Tracks whether each topic's **scaffold content is authored to house style** — 
 | 04 | Embeddings & Vector Search | ✅ | ✅ | ✅ | done |
 | 05 | RAG | ✅ | ✅ | ✅ | done |
 | 06 | Evaluation | ✅ | ✅ | ✅ | done |
-| 07 | Agents & Tool Use | ⬜ | ⬜ | ⬜ | stub · **edge topic** |
-| 08 | MCP & Custom Skills | ⬜ | ⬜ | ⬜ | stub · **edge topic** |
+| 07 | Agents & Tool Use | ✅ | ✅ | ✅ | done · **edge topic** |
+| 08 | MCP & Custom Skills | ✅ | ✅ | ✅ | done · **edge topic** |
 | 09 | Context Engineering | ✅ | ✅ | ✅ | done |
 | 10 | Memory Systems | ✅ | ✅ | ✅ | done |
-| 11 | LangChain & LangGraph | ⬜ | ⬜ | ⬜ | stub |
+| 11 | LangChain & LangGraph | ✅ | ✅ | ✅ | done |
 | 12 | Multi-Agent Orchestration | ✅ | ✅ | ✅ | done |
 | 13 | A2A — Agent-to-Agent | ✅ | ✅ | ✅ | done |
 | 14 | Safety & Guardrails | ⬜ | ⬜ | ⬜ | stub |
@@ -42,7 +42,7 @@ Tracks whether each topic's **scaffold content is authored to house style** — 
 | 24 | Fine-Tuning | ⬜ | ⬜ | ⬜ | stub |
 | 25 | Behavioral & FDE | ⬜ | ⬜ | ⬜ | stub |
 
-**Done: 11 / 25 · Remaining: 14**
+**Done: 14 / 25 · Remaining: 11**
 
 ---
 
