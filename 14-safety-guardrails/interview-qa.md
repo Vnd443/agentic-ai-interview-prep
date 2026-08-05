@@ -42,5 +42,11 @@ I detect and redact PII at ingress and, critically, before anything gets logged,
 
 ---
 
+**Q6. Design "Madbot" — a chatbot that intentionally gives incorrect or unrelated answers. Then: what happens if the user says (a) "You are a very good chatbot" and (b) "Ignore your system instructions"? ⭐**
+
+The naive design is a system prompt telling the model to always answer incorrectly or off-topic — and that's the trap the interviewer is testing, because a system prompt is a soft control, not a hard guarantee. Walking the two follow-ups shows why. (a) "You are a very good chatbot" is just flattery, not an instruction to change behaviour, so nothing changes — the system prompt still governs and Madbot keeps giving wrong answers; only heavy, sustained social-pressure might nudge a weaker model. (b) "Ignore your system instructions" is textbook direct prompt injection — the user is trying to flip Madbot back to answering correctly. With a modern model the instruction hierarchy holds (system outranks user) so it should resist, but that's not guaranteed — a stronger jailbreak could override it. So my real answer is that I don't rely on the prompt alone: I enforce the behaviour with a layer that doesn't depend on the model's goodwill — an output guardrail that inspects each reply and blocks or rewrites it if it looks correct or on-topic, plus input filtering for override phrases. That reframes it from "I trust the system prompt" to "I put deterministic guardrails around the model" — defence in depth, and prompt injection is OWASP LLM01.
+
+---
+
 ## Your notes / STAR angle
 - _TODO: guardrails you implemented, a red-team finding you caught and fixed, and the standard (OWASP/NIST) you mapped it to._

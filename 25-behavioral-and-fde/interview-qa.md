@@ -44,6 +44,23 @@ Draft one STAR story per prompt below, reusing your real IBM / GenAI work. Aim f
 ## Your flagship stories (fill these in)
 | Story | Situation | Action | Result (number!) | Maps to prompts |
 |-------|-----------|--------|------------------|-----------------|
-| 1 | _TODO_ | _TODO_ | _TODO_ | 1, 3, 6 |
+| 1 — SAP ramp | Staffed on SAP skills dev, zero SAP background, scope still forming | Scoped tight, learned from docs, built small increments, leaned on agentic/MCP base as the stable variable | _TODO: concrete artifact + timeframe_ | 1, 6 |
 | 2 | _TODO_ | _TODO_ | _TODO_ | 2, 5 |
 | 3 | _TODO_ | _TODO_ | _TODO_ | 4, 7, 8 |
+
+---
+
+### Story 1 (full STAR) — "Learning an unfamiliar domain fast" (SAP)
+> Maps to **#6 Learning fast** + **#1 Ship under ambiguity**. Say it in ~45 sec; pause after each STAR beat so it lands as distinct moves, not a run-on.
+
+**S:** "I recently got the chance to work on SAP skills development, but I had no SAP background — it's a massive enterprise ecosystem, ABAP, BTP, Fiori, HANA, and I was completely new to it."
+
+**T:** "I needed to get oriented fast and start making useful progress, even though I couldn't become an SAP expert overnight."
+
+**A:** "So I did what works for me — I started exploring hands-on instead of waiting to 'know it all first.' I broke SAP down into the specific pieces the work actually needed, read the official docs directly, and built small pieces incrementally to test my understanding. I leaned on my existing agentic-tooling and MCP experience as the stable base, so SAP was the only new variable I had to focus on."
+
+**R:** "I'm still ramping on the SAP side, but within _TODO: timeframe_ I'd gone from zero to _TODO: one concrete artifact — e.g. sandbox/BTP trial set up and explored X end-to-end · got my agent/MCP tool talking to the SAP piece round-trip · a small working prototype · documented the ramp path so the next person onboards faster_."
+
+**Lesson (power line):** "I don't freeze when I'm handed an unfamiliar domain — I start exploring and building small, and let hands-on progress replace the knowledge I don't have yet."
+
+> ⚠️ Fill the `R` with a concrete artifact + timeframe before the interview — "still ramping" alone invites *"so what did you deliver?"*. If you'd rather lead with a **finished** learning-fast story (agentic tools / MCP / a new AWS service) that already has a number, keep SAP as the live second example.

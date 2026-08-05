@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 400" font-family="'Segoe UI',Roboto,Arial,sans-serif">
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#94A3B8"/>
+    </marker>
+  </defs>
+  <style>
+    .lbl{font-size:14px;font-weight:600;}
+    .sm{font-size:13px;font-weight:600;}
+    .cap{font-size:12px;fill:#64748B;font-weight:600;}
+    .edge{stroke:#94A3B8;stroke-width:2;fill:none;}
+    .tealedge{stroke:#0D9488;stroke-width:2;fill:none;}
+  </style>
+  <rect x="12" y="12" width="976" height="376" rx="16" fill="#ffffff" stroke="#E5E7EB" stroke-width="1.5"/>
+
+  <!-- Goal in -->
+  <rect x="24" y="163" width="100" height="54" rx="10" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+  <text class="lbl" x="74" y="195" text-anchor="middle" fill="#1E40AF">Goal</text>
+
+  <!-- Outer Agentic AI loop panel -->
+  <rect x="150" y="40" width="690" height="316" rx="14" fill="#FAF5FF" stroke="#7C3AED" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <text class="cap" x="495" y="62" text-anchor="middle" fill="#6D28D9">Agentic AI &#183; plan &#8594; act &#8594; observe &#8594; reflect (loops until goal met)</text>
+
+  <!-- Planner / agent controller -->
+  <polygon points="240,146 312,190 240,234 168,190" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+  <text class="sm" x="240" y="186" text-anchor="middle" fill="#92400E">Plan /</text>
+  <text class="sm" x="240" y="203" text-anchor="middle" fill="#92400E">decide</text>
+
+  <!-- Agentic RAG nested panel (a tool) -->
+  <rect x="400" y="78" width="420" height="132" rx="12" fill="#F0FDFA" stroke="#0D9488" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <text class="cap" x="610" y="98" text-anchor="middle" fill="#0F766E">Agentic RAG &#8212; the retrieval tool (own retrieve &#8594; grade loop)</text>
+
+  <rect x="416" y="120" width="94" height="44" rx="9" fill="#F1F5F9" stroke="#64748B" stroke-width="1.5"/>
+  <text class="sm" x="463" y="147" text-anchor="middle" fill="#334155">write query</text>
+  <rect x="538" y="120" width="94" height="44" rx="9" fill="#CCFBF1" stroke="#0D9488" stroke-width="1.5"/>
+  <text class="sm" x="585" y="147" text-anchor="middle" fill="#0F766E">vector DB</text>
+  <polygon points="712,116 750,142 712,168 674,142" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+  <text class="sm" x="712" y="147" text-anchor="middle" fill="#92400E">grade</text>
+
+  <line class="tealedge" x1="510" y1="142" x2="536" y2="142" marker-end="url(#ah)"/>
+  <line class="tealedge" x1="632" y1="142" x2="672" y2="142" marker-end="url(#ah)"/>
+  <!-- re-query loop inside RAG -->
+  <path class="tealedge" d="M712,168 L712,192 L463,192 L463,166" marker-end="url(#ah)"/>
+  <text class="cap" x="588" y="188" text-anchor="middle" fill="#0F766E">re-query if weak</text>
+
+  <!-- Other tools -->
+  <rect x="400" y="252" width="420" height="52" rx="10" fill="#F1F5F9" stroke="#64748B" stroke-width="1.5"/>
+  <text class="sm" x="610" y="283" text-anchor="middle" fill="#334155">Other tools &#183; code &#183; API &#183; SQL &#183; calculator</text>
+
+  <!-- Answer out -->
+  <rect x="856" y="163" width="120" height="54" rx="10" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+  <text class="lbl" x="916" y="195" text-anchor="middle" fill="#15803D">Answer</text>
+
+  <!-- edges -->
+  <line class="edge" x1="124" y1="190" x2="166" y2="190" marker-end="url(#ah)"/>
+  <!-- planner -> RAG tool -->
+  <path class="edge" d="M312,178 L356,142 L398,142" marker-end="url(#ah)"/>
+  <text class="cap" x="352" y="128" text-anchor="middle">call tool</text>
+  <!-- planner -> other tools -->
+  <path class="edge" d="M312,202 L356,278 L398,278" marker-end="url(#ah)"/>
+  <!-- tools -> planner (observe / reflect) -->
+  <path class="edge" d="M400,222 L300,222 L286,208" marker-end="url(#ah)"/>
+  <text class="cap" x="360" y="238" text-anchor="middle">observe &#8594; reflect</text>
+  <!-- goal met -> answer -->
+  <path class="edge" d="M240,234 L240,336 L856,336 L856,218" marker-end="url(#ah)"/>
+  <text class="cap" x="300" y="328" fill="#15803D">goal met</text>
+</svg>

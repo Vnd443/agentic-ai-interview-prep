@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 260" font-family="'Segoe UI',Roboto,Arial,sans-serif">
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#94A3B8"/>
+    </marker>
+  </defs>
+  <style>
+    .lbl{font-size:14px;font-weight:600;}
+    .cap{font-size:12px;fill:#64748B;font-weight:600;}
+    .edge{stroke:#94A3B8;stroke-width:2;fill:none;}
+  </style>
+  <rect x="12" y="12" width="896" height="236" rx="16" fill="#ffffff" stroke="#E5E7EB" stroke-width="1.5"/>
+
+  <rect x="30"  y="103" width="120" height="54" rx="10" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+  <text class="lbl" x="90"  y="132" text-anchor="middle" fill="#1E40AF">Document</text>
+
+  <rect x="210" y="46"  width="140" height="54" rx="10" fill="#F1F5F9" stroke="#64748B" stroke-width="1.5"/>
+  <text class="lbl" x="280" y="75"  text-anchor="middle" fill="#334155">Chunk</text>
+  <rect x="210" y="160" width="140" height="54" rx="10" fill="#EDE9FE" stroke="#7C3AED" stroke-width="1.5"/>
+  <text class="lbl" x="280" y="183" text-anchor="middle" fill="#5B21B6" font-size="13">LLM writes</text>
+  <text class="lbl" x="280" y="201" text-anchor="middle" fill="#5B21B6" font-size="13">chunk context</text>
+
+  <rect x="410" y="103" width="150" height="54" rx="10" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+  <text class="lbl" x="485" y="126" text-anchor="middle" fill="#92400E" font-size="13">context</text>
+  <text class="lbl" x="485" y="144" text-anchor="middle" fill="#92400E" font-size="13">+ chunk</text>
+
+  <rect x="620" y="103" width="110" height="54" rx="10" fill="#F1F5F9" stroke="#64748B" stroke-width="1.5"/>
+  <text class="lbl" x="675" y="132" text-anchor="middle" fill="#334155">Embed</text>
+  <rect x="770" y="100" width="120" height="60" rx="12" fill="#CCFBF1" stroke="#0D9488" stroke-width="1.5"/>
+  <text class="lbl" x="830" y="134" text-anchor="middle" fill="#0F766E">Vector DB</text>
+
+  <path class="edge" d="M150,120 L180,120 L180,73 L208,73"   marker-end="url(#ah)"/>
+  <path class="edge" d="M150,140 L180,140 L180,187 L208,187" marker-end="url(#ah)"/>
+  <path class="edge" d="M350,73 L380,73 L380,120 L408,120"   marker-end="url(#ah)"/>
+  <path class="edge" d="M350,187 L380,187 L380,140 L408,140" marker-end="url(#ah)"/>
+  <line class="edge" x1="560" y1="130" x2="618" y2="130" marker-end="url(#ah)"/>
+  <line class="edge" x1="730" y1="130" x2="768" y2="130" marker-end="url(#ah)"/>
+  <text class="cap" x="90" y="34">Ingestion time — each chunk stored self-describing</text>
+</svg>

@@ -48,5 +48,11 @@ When the task needs reasoning or style rather than facts (prompt or fine-tune in
 
 ---
 
+**Q7. Is RAG dead now that models have million-token context windows? And what's the difference between RAG, Agentic RAG, and Agentic AI? ⭐**
+
+No — what's dying is *naive* one-shot vector RAG, not retrieval itself. "Just paste the whole corpus into a 1M-token window" fails on three things I always name: cost (you pay for every token on every call — a 300-page doc is ~200k tokens per question), accuracy ("lost in the middle" / context rot — models miss facts buried in a huge prompt), and reality (enterprise corpora are gigabytes with access control and daily updates, which never fit any window). So retrieval never goes away; it just gets smarter. The progression is naive RAG → agentic retrieval. On the naming: **Agentic AI** is the umbrella — a model in a plan → act → observe → reflect loop that can call tools, keep state, and pursue a goal. **Agentic RAG** is the retrieval piece *inside* that loop: instead of retrieving once, the agent decides whether to retrieve, writes its own query, grades what came back, and re-queries if it's weak. My one-liner is *"Agentic RAG is the retrieval module inside an Agentic AI workflow — retrieval is one tool the agent chooses to use, alongside code, APIs, or SQL."* Concrete example: "How did our revenue growth compare year-over-year over three years?" — naive RAG does one search and stuffs whatever it gets; agentic RAG runs three targeted retrievals (one per year), notices a gap, re-queries, then synthesizes. The honest trade-off, and the power move to close on: agentic adds latency, tokens, and non-determinism, so I gate it with a **max-iteration cap and a budget guard**, and in production I run a tiered system — cheap naive RAG for simple lookups, escalate to agentic only for multi-step questions.
+
+---
+
 ## Your notes / STAR angle
 - _TODO: your production RAG system — corpus size, stack, chunking choice, and eval numbers (recall / faithfulness before → after)._

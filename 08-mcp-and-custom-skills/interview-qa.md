@@ -48,5 +48,17 @@ _(Structure to fill with your real work.)_ I start with the problem — the repe
 
 ---
 
+**Q7. Walk me through what actually happens when an agent uses an MCP tool — the architecture and the lifecycle. ⭐**
+
+There are three roles. The host is the app the user talks to, like Claude Desktop or an IDE — the front door. Inside it, a client acts as a per-server translator, carrying requests out and responses back. And the server exposes the tools, resources, and prompts of an application — a Gmail server offers read, search, and send. The lifecycle is five steps: first the model plans and realizes the task needs an external action; then it discovers which servers are connected and what they can do; then — the part I emphasize — it reads the tool's schema, its contract of parameters and types, at run-time, so nothing is hardcoded; then authentication, usually OAuth, verifies the user's identity and permissions; then it executes the tool through the server, gets the data back, reasons over it, and answers. The differentiator I call out is run-time schema discovery: because the model learns each tool's contract on the fly, I can add, change, or remove a tool by editing its server and the agent adapts with zero code change. That's also what makes it enterprise-grade — you get scalable maintenance, RBAC so users only reach data they're allowed to, audit logs for traceability, and graceful failure where a down server reports its specific error instead of crashing the task.
+
+---
+
+**Q8. How do MCP, RAG, and the LLM fit together in a real enterprise system?**
+
+They're three pillars and the strong systems use all three. The LLM is the reasoning engine — it thinks and plans. RAG is knowledge — it retrieves the right facts so the answer is grounded in current, private data instead of guessed from memory. MCP is action — it lets the agent actually reach and change real systems, send the email, run the query, update the record. My one-liner is "LLM thinks, RAG knows, MCP acts." The analogy is a capable employee: the LLM is the brain, RAG is the reference library they look things up in, and MCP is the hands plus building access that let them get work done — drop any one and they're stuck. So when I design an enterprise assistant I ask which pillars the task needs: pure reasoning might be LLM-only, a grounded Q&A adds RAG, and anything that has to *do* something adds MCP.
+
+---
+
 ## Your notes / STAR angle
 - _TODO: your strongest MCP-server or custom-skill story — problem, interface exposed, auth/safety, reuse, outcome. This is the headline of your profile._

@@ -125,6 +125,55 @@ flowchart LR
 
 ---
 
+## 11. Host, Client, Server — the three roles
+
+**Definition:** MCP has three components. The **Host** is the app the user actually talks to (ChatGPT, Claude Desktop, an IDE) — the front door where prompts come in. The **Client** lives inside the host and acts as a **translator**: one client per server, it carries the host's request to a server and the server's response back. The **Server** exposes the tools, resources, and prompts of an application — a *Gmail server* offers read/search/send; a *database server* offers run-query/fetch-records.
+
+**Example — a restaurant:** the **Host** is the dining room where you sit and order; the **Client** is the waiter who carries your order to the kitchen and brings the dish back; the **Server** is the kitchen that actually does the work. You never talk to the kitchen directly — the waiter (client) translates both ways.
+
+**Why it matters:** *"Host is the UI, client is the per-server translator, server exposes the actual capabilities."* The key advantage to name: **the model needs no hardcoded knowledge of a tool — it discovers what a server can do at run-time.**
+
+---
+
+## 12. The request lifecycle (plan → discover → schema → auth → execute) ⭐
+
+**Definition:** When a prompt needs the outside world, the agent runs five steps:
+1. **Planning** — it recognizes the task needs external data or an action.
+2. **Discovery** — it finds which MCP servers are connected and what they offer.
+3. **Schema understanding** — it reads the tool's **contract** (parameters, input types) **at run-time** — no prior hardcoding.
+4. **Authentication** — the system verifies identity and permissions, often via **OAuth**, before access.
+5. **Execution & reasoning** — it calls the tool through the server, gets the data, reasons over it, and answers.
+
+**Example — a new employee handed a task:** they check what systems exist (discovery), read the form's required fields (schema), badge in (auth), then actually do the job and report back (execute).
+
+**Why it matters:** Run-time schema discovery is the differentiator. *"The model learns each tool's contract at run-time, so I can add, change, or remove a tool by editing its server — the agent adapts without any code change."*
+
+---
+
+## 13. Why enterprises adopt MCP (scale · RBAC · audit · graceful failure)
+
+**Definition:** Four properties make MCP enterprise-grade:
+- **Scalability** — change an app and you update only *its* server, not every AI assistant.
+- **Security** — **RBAC** (role-based access control) so a user only reaches data they're authorized to see.
+- **Traceability** — **audit logs** of what the agent did and why, for compliance and debugging.
+- **Graceful failure** — if one server (say Slack) is down, the agent reports *that specific* failure instead of crashing the whole task.
+
+**Example:** a big company with one badge system for every building. Add a new office → register one door reader (server); you don't re-issue everyone's badge. Access is scoped per role, every swipe is logged, and a broken reader just denies that door — the building still runs.
+
+**Why it matters:** *"MCP isn't just convenience — it gives enterprises scalable maintenance, RBAC, audit logs, and graceful degradation, which is what makes it safe to put an agent in front of real systems."* (→ [[14-safety-guardrails]] · [[16-monitoring-and-debugging]])
+
+---
+
+## 14. The three pillars: LLM + RAG + MCP
+
+**Definition:** The strongest enterprise AI systems combine three layers: **LLM** for *reasoning*, **RAG** for *knowledge* (retrieve the right facts, → [[05-rag]]), and **MCP** for *action* (reach and change real systems). Reasoning alone is isolated; add knowledge and it's grounded; add action and it can actually *do* things.
+
+**Example — a capable employee:** the **brain** that reasons (LLM), the **reference library** they look things up in (RAG), and the **hands plus building access** to get work done (MCP). Remove any one and they're stuck: no brain can't think, no library guesses, no hands can only talk.
+
+**Why it matters:** The one-liner that ties the whole curriculum together. *"LLM thinks, RAG knows, MCP acts — real enterprise AI needs all three."*
+
+---
+
 ## Quick misconceptions to avoid
 - ❌ "MCP is a model or a framework." → It's an **open protocol** (a standard), not a model or library.
 - ❌ "A skill is just a tool." → A tool is one callable; a **skill is procedural know-how** that may orchestrate tools.
@@ -132,6 +181,8 @@ flowchart LR
 - ❌ "A standard connector means it's safe." → Vet servers, least-privilege, sandbox — resource content can carry **injection**.
 - ❌ "MCP and A2A are the same." → MCP = agent↔**tools**; A2A = agent↔**agents**.
 - ❌ "You must build a server from scratch." → Reuse community servers; build your own only to expose *your* systems.
+- ❌ "The agent needs the tool's API hardcoded." → No — it **discovers** servers and learns the tool **schema at run-time**.
+- ❌ "MCP replaces RAG." → Different pillars: **RAG = knowledge, MCP = action** — enterprise systems use both plus the LLM.
 
 ---
 _Related: [[07-agents-tool-use]] · [[13-a2a-agent-to-agent]] · [[09-context-engineering]] · [[14-safety-guardrails]] · [[11-langchain-langgraph]] · [[24-fine-tuning]]_

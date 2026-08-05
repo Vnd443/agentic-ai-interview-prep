@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 300" font-family="'Segoe UI',Roboto,Arial,sans-serif">
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#94A3B8"/>
+    </marker>
+  </defs>
+  <style>
+    .lbl{font-size:14px;font-weight:600;}
+    .cap{font-size:12px;fill:#64748B;font-weight:600;}
+    .edge{stroke:#94A3B8;stroke-width:2;fill:none;}
+  </style>
+  <rect x="12" y="12" width="936" height="276" rx="16" fill="#ffffff" stroke="#E5E7EB" stroke-width="1.5"/>
+
+  <rect x="30"  y="123" width="110" height="54" rx="10" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+  <text class="lbl" x="85"  y="152" text-anchor="middle" fill="#1E40AF">Query</text>
+  <rect x="176" y="123" width="120" height="54" rx="10" fill="#F1F5F9" stroke="#64748B" stroke-width="1.5"/>
+  <text class="lbl" x="236" y="152" text-anchor="middle" fill="#334155">Retrieve</text>
+
+  <!-- grade diamond centered (400,150) -->
+  <polygon points="400,108 470,150 400,192 330,150" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+  <text class="lbl" x="400" y="154" text-anchor="middle" fill="#92400E" font-size="13">Grade</text>
+
+  <rect x="560" y="52"  width="150" height="54" rx="10" fill="#FFE4E6" stroke="#E11D48" stroke-width="1.5"/>
+  <text class="lbl" x="635" y="75"  text-anchor="middle" fill="#9F1239" font-size="13">Web / refine</text>
+  <text class="lbl" x="635" y="93"  text-anchor="middle" fill="#9F1239" font-size="13">(re-retrieve)</text>
+
+  <rect x="600" y="196" width="130" height="54" rx="10" fill="#EDE9FE" stroke="#7C3AED" stroke-width="1.5"/>
+  <text class="lbl" x="665" y="227" text-anchor="middle" fill="#5B21B6">Generate</text>
+  <rect x="790" y="196" width="130" height="54" rx="10" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+  <text class="lbl" x="855" y="227" text-anchor="middle" fill="#15803D">Answer</text>
+
+  <line class="edge" x1="140" y1="150" x2="174" y2="150" marker-end="url(#ah)"/>
+  <line class="edge" x1="296" y1="150" x2="328" y2="150" marker-end="url(#ah)"/>
+  <!-- weak/wrong: grade -> web -->
+  <path class="edge" d="M430,130 L500,90 L558,80" marker-end="url(#ah)"/>
+  <text class="cap" x="470" y="104" fill="#9F1239">weak / wrong</text>
+  <!-- correct: grade -> generate -->
+  <path class="edge" d="M430,170 L560,210 L598,220" marker-end="url(#ah)"/>
+  <text class="cap" x="470" y="200" fill="#15803D">correct</text>
+  <!-- web -> generate -->
+  <path class="edge" d="M635,106 L635,160 L665,160 L665,194" marker-end="url(#ah)"/>
+  <line class="edge" x1="730" y1="223" x2="788" y2="223" marker-end="url(#ah)"/>
+</svg>

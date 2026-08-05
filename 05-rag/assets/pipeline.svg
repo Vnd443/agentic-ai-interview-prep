@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 400" font-family="'Segoe UI',Roboto,Arial,sans-serif">
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#94A3B8"/>
+    </marker>
+  </defs>
+  <style>
+    .lbl{font-size:14px;font-weight:600;}
+    .cap{font-size:12px;fill:#64748B;font-weight:600;}
+    .sect{font-size:12px;font-weight:700;fill:#94A3B8;letter-spacing:1.5px;}
+    .edge{stroke:#94A3B8;stroke-width:2;fill:none;}
+  </style>
+  <rect x="14" y="14" width="972" height="372" rx="16" fill="#ffffff" stroke="#E5E7EB" stroke-width="1.5"/>
+  <line x1="40" y1="160" x2="960" y2="160" stroke="#EEF2F7" stroke-width="1.5" stroke-dasharray="5 5"/>
+  <text class="sect" x="52" y="56">OFFLINE · INGESTION</text>
+  <text class="sect" x="52" y="230">ONLINE · QUERY TIME</text>
+
+  <!-- Ingest row -->
+  <g>
+    <rect x="52"  y="74" width="120" height="52" rx="10" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+    <text class="lbl" x="112" y="101" text-anchor="middle" fill="#1E40AF">Docs</text>
+    <rect x="232" y="74" width="120" height="52" rx="10" fill="#F1F5F9" stroke="#64748B" stroke-width="1.5"/>
+    <text class="lbl" x="292" y="101" text-anchor="middle" fill="#334155">Chunk</text>
+    <rect x="412" y="74" width="120" height="52" rx="10" fill="#F1F5F9" stroke="#64748B" stroke-width="1.5"/>
+    <text class="lbl" x="472" y="101" text-anchor="middle" fill="#334155">Embed</text>
+    <rect x="612" y="70" width="130" height="60" rx="12" fill="#CCFBF1" stroke="#0D9488" stroke-width="1.5"/>
+    <text class="lbl" x="677" y="104" text-anchor="middle" fill="#0F766E">Vector DB</text>
+    <line class="edge" x1="174" y1="100" x2="230" y2="100" marker-end="url(#ah)"/>
+    <line class="edge" x1="354" y1="100" x2="410" y2="100" marker-end="url(#ah)"/>
+    <line class="edge" x1="534" y1="100" x2="610" y2="100" marker-end="url(#ah)"/>
+  </g>
+
+  <!-- VDB feeds retrieve -->
+  <path class="edge" d="M677,130 L677,190 L412,190 L412,246" marker-end="url(#ah)"/>
+  <text class="cap" x="500" y="184" text-anchor="middle">top-k lookup</text>
+
+  <!-- Query row -->
+  <g>
+    <rect x="52"  y="248" width="112" height="52" rx="10" fill="#DBEAFE" stroke="#2563EB" stroke-width="1.5"/>
+    <text class="lbl" x="108" y="275" text-anchor="middle" fill="#1E40AF">Query</text>
+    <rect x="196" y="248" width="112" height="52" rx="10" fill="#F1F5F9" stroke="#64748B" stroke-width="1.5"/>
+    <text class="lbl" x="252" y="275" text-anchor="middle" fill="#334155">Embed</text>
+    <rect x="356" y="248" width="112" height="52" rx="10" fill="#F1F5F9" stroke="#64748B" stroke-width="1.5"/>
+    <text class="lbl" x="412" y="275" text-anchor="middle" fill="#334155">Retrieve</text>
+    <rect x="500" y="248" width="112" height="52" rx="10" fill="#F1F5F9" stroke="#64748B" stroke-width="1.5"/>
+    <text class="lbl" x="556" y="275" text-anchor="middle" fill="#334155">Re-rank</text>
+    <rect x="644" y="248" width="112" height="52" rx="10" fill="#EDE9FE" stroke="#7C3AED" stroke-width="1.5"/>
+    <text class="lbl" x="700" y="275" text-anchor="middle" fill="#5B21B6">Generate</text>
+    <rect x="800" y="248" width="150" height="52" rx="10" fill="#DCFCE7" stroke="#16A34A" stroke-width="1.5"/>
+    <text class="lbl" x="875" y="275" text-anchor="middle" fill="#15803D">Answer + cites</text>
+    <line class="edge" x1="164" y1="274" x2="194" y2="274" marker-end="url(#ah)"/>
+    <line class="edge" x1="308" y1="274" x2="354" y2="274" marker-end="url(#ah)"/>
+    <line class="edge" x1="468" y1="274" x2="498" y2="274" marker-end="url(#ah)"/>
+    <line class="edge" x1="612" y1="274" x2="642" y2="274" marker-end="url(#ah)"/>
+    <line class="edge" x1="756" y1="274" x2="798" y2="274" marker-end="url(#ah)"/>
+  </g>
+</svg>
